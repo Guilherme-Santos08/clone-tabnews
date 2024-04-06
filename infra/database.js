@@ -12,7 +12,13 @@ async function query(queryObject) {
   const result = await client.query(queryObject)
   await client.end()
 
-  return result
+  try {
+    return result
+  } catch (err) {
+    console.error(err)
+  } finally {
+    await client.end()
+  }
 }
 
 export default {
