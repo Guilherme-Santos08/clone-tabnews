@@ -1,1 +1,3 @@
+npx secretlint .
 npx commitlint --edit $1
+
