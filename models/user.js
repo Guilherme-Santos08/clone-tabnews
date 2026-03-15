@@ -1,7 +1,8 @@
 import database from 'infra/database'
+import password from 'models/password.js'
 import { NotFoundError, ValidationError } from 'infra/errors.js'
 
-async function findOneyByUsername(username) {
+async function findOneByUsername(username) {
   const userFound = await runSelectQuery(username)
   return userFound
 
@@ -34,6 +35,7 @@ async function findOneyByUsername(username) {
 async function create(userInputValues) {
   await validateUniqueEmail(userInputValues.email)
   await validateUniqueUsername(userInputValues.username)
+  await hashPasswordInObject(userInputValues)
 
   const newUser = await runInsertQuery(userInputValues)
 
@@ -81,6 +83,11 @@ async function create(userInputValues) {
     }
   }
 
+  async function hashPasswordInObject(userInputValues) {
+    const hashedPassword = await password.hash(userInputValues.password)
+    userInputValues.password = hashedPassword
+  }
+
   async function runInsertQuery(userInputValues) {
     const results = await database.query({
       text: `
@@ -101,6 +108,6 @@ async function create(userInputValues) {
   }
 }
 
-const user = { create, findOneyByUsername }
+const user = { create, findOneByUsername }
 
 export default user
