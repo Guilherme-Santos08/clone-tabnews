@@ -6,7 +6,7 @@ import password from 'models/password.js'
 beforeAll(async () => {
   await orchestrator.waitForAllServices()
   await orchestrator.clearDatabase()
-  await orchestrator.runPendingMIgrations()
+  await orchestrator.runPendingMigrations()
 })
 
 describe('POST /api/v1/users', () => {
