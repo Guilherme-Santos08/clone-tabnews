@@ -31,7 +31,7 @@
     "bcryptjs": "3.0.2",
     "cookie": "1.0.2",
     "dotenv-expand": "11.0.6",
-    "next": "14.2.5",
+    "next": "16.3.0",
     "next-connect": "1.0.0",
     "node-pg-migrate": "7.6.1",
     "nodemailer": "7.0.5",
